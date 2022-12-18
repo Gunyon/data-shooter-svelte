@@ -15,52 +15,9 @@ p {
   margin: 0;
 }
 
-nav {
-  height: 84px;
-  width: 100vw;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  font-size: 14px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-bottom: 1px solid #bec4cc;
-}
-
-.nav-wrapper {
-  width: 80%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.details {
-  display: flex;
-  align-items: center;
-}
-
-.log-out-icon {
-  margin: 0 10px 0 30px;
-}
-
-.log-out-link {
-  text-decoration: none;
-  color: black;
-  display: flex;
-  align-items: center;
-}
-
-.user-name-field {
-  color: #818890;
-}
-
 main {
-  min-height: 100vh;
-  width: 100vw;
   background-color: #f8f8f8;
-  padding-top: 100px;
+  padding-top: 70px;
   display: flex;
   justify-content: center;
 }
@@ -71,60 +28,42 @@ main {
 }
 
 .title {
-  margin: 80px 0 30px 40px;
+  margin: 60px 0 30px 40px;
   color: #24292c;
   font-size: 22px;
 }
 
-ul {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-li {
+.tab-btn {
   width: 200px;
   border: 1px solid #dae1e7;
-  display: grid;
-  place-items: center;
-  position: relative;
-  top: 1px;
-}
-
-li button {
   padding: 15px;
   cursor: pointer;
   color: #818890;
   font-size: 15px;
   font-weight: 700;
   appearance: none;
-  border: none;
   background-color: transparent;
-  width: 100%;
-  height: 100%;
+  margin-bottom: -1px;
+  z-index: 1;
 }
 
-li:first-of-type {
+.tab-btn:first-of-type {
   border-radius: 6px 0 0 0;
 }
 
-li:last-of-type {
+.tab-btn:last-of-type {
   border-radius: 0 6px 0 0;
 }
 
-.active button {
+.tab-btn.active {
   background-color: white;
-  border-bottom: none;
+  border-bottom-color: white;
   color: #0083bb;
 }
 
-section {
+.tab-content {
   width: 100%;
   background-color: white;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
   padding: 80px;
   align-items: flex-start;
   gap: 40px;
@@ -187,7 +126,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 input[type='date'] {
   border: none;
   border-bottom: 1px solid #bec4cc;
-  padding: 10px 10px 10px 0;
+  padding: 0 10px 10px 0;
   position: relative;
   cursor: pointer;
   font-size: 15px;
@@ -207,14 +146,16 @@ input[type='date'] {
   right: 42px;
 }
 
-.subtitle {
+.label {
+  display: block;
   font-size: 13px;
   color: #818890;
-  margin: 4px 0 4px 2px;
+  margin: 4px 0 15px;
 }
 
 .calendar-container {
   display: inline-block;
+  margin-bottom: 30px;
 }
 
 .select {
@@ -225,6 +166,7 @@ input[type='date'] {
   font-size: 15px;
   font-weight: 500;
   color: #24292c;
+  margin-bottom: 30px;
 }
 
 .select:focus {
@@ -232,19 +174,6 @@ input[type='date'] {
 }
 
 @media (max-width: 700px) {
-  .nav-wrapper {
-    flex-direction: column;
-  }
-  .logo {
-    width: 280px;
-    margin: 20px;
-  }
-
-  nav {
-    height: 100px;
-    padding-bottom: 10px;
-  }
-
   .main-wrapper {
     width: 95%;
   }

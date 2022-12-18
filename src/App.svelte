@@ -1,11 +1,7 @@
 <script lang="ts">
-  import logo from './assets/logo.svg';
-  import logout from './assets/log-out.svg';
+  import Header from './components/Header.svelte';
 
-  let activeTab: 'last' | 'specific' | 'period' = 'last';
-
-  const authToken = localStorage.getItem('authToken');
-  const userName = localStorage.getItem('userName');
+  let tab: 'last' | 'specific' | 'period' = 'last';
 
   let dateStart = new Date();
   let dateEnd = new Date();
@@ -18,7 +14,7 @@
 
   const headers = {
     headers: {
-      Authorization: `Bearer ${authToken}`
+      Authorization: `Bearer ${localStorage.getItem('authToken') || ''}`
     }
   };
 
@@ -76,10 +72,10 @@
     fetch(url, headers)
       .then(response => handleError(response))
       .then(response => response.blob())
-      .then(document => {
+      .then(file => {
         let filename = `data-shooter.${extensions[type]}`;
         const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', window.URL.createObjectURL(document));
+        linkElement.setAttribute('href', window.URL.createObjectURL(file));
         linkElement.setAttribute('download', filename);
         linkElement.click();
       })
@@ -87,97 +83,71 @@
   }
 </script>
 
-<nav>
-  <div class="nav-wrapper">
-    <img class="logo" src={logo} alt="logo" />
-    <div class="details">
-      {#if userName}
-        <p class="user-name-field">{userName}</p>
-      {/if}
-      <a
-        class="log-out-link"
-        href="https://www.energymarketprice.com/home/logout"
-        ><img src={logout} class="log-out-icon" alt="logout icon" /> Logout</a
-      >
-    </div>
-  </div>
-</nav>
+<Header />
 
 <main>
   <div class="main-wrapper">
     <h1 class="title">Get Your Data Shooter Link and Markets</h1>
 
-    <div class="container">
-      <ul>
-        <li class:active={activeTab === 'last'}>
-          <button on:click={() => (activeTab = 'last')}>
-            Last Working Day
-          </button>
-        </li>
-        <li class:active={activeTab === 'specific'}>
-          <button on:click={() => (activeTab = 'specific')}>
-            Specific Day
-          </button>
-        </li>
-        <li class:active={activeTab === 'period'}>
-          <button on:click={() => (activeTab = 'period')}>
-            Specific period
-          </button>
-        </li>
-      </ul>
-
-      <section>
-        {#if activeTab !== 'last'}
-          <div class="calendar-container">
-            <p class="subtitle">From Date</p>
-            <span class="calendar-icon">
-              <input
-                data-type="specific"
-                type="date"
-                id="selectStartDateElement"
-              />
-            </span>
-          </div>
-        {/if}
-
-        {#if activeTab === 'period'}
-          <div class="calendar-container">
-            <p class="subtitle">To Date</p>
-            <span class="calendar-icon">
-              <input
-                data-type="specific"
-                type="date"
-                id="selectEndDateElement"
-              />
-            </span>
-          </div>
-        {/if}
-
-        <div>
-          <p class="subtitle">Select Group Name</p>
-          <select class="select"
-            ><option value="">All Markets</option>
-            {#each markets as market}
-              <option value={market.id}>{market.name}</option>
-            {/each}
-          </select>
-        </div>
-
-        <div>
-          <button class="emp-btn" on:click={() => downloadFile('XML')}
-            >XML</button
-          >
-          <button class="emp-btn" on:click={() => downloadFile('JSON')}
-            >JSON</button
-          >
-          <button class="emp-btn excel" on:click={() => downloadFile('EXCEL')}
-            >EXCEL</button
-          >
-        </div>
-      </section>
+    <div class="tabs">
+      <button
+        class="tab-btn"
+        class:active={tab === 'last'}
+        on:click={() => (tab = 'last')}
+      >
+        Last Working Day
+      </button>
+      <button
+        class="tab-btn"
+        class:active={tab === 'specific'}
+        on:click={() => (tab = 'specific')}
+      >
+        Specific Day
+      </button>
+      <button
+        class="tab-btn"
+        class:active={tab === 'period'}
+        on:click={() => (tab = 'period')}
+      >
+        Specific period
+      </button>
     </div>
+
+    <section class="tab-content">
+      {#if tab !== 'last'}
+        <div class="calendar-container">
+          <label class="label" for="date-start">From Date</label>
+          <span class="calendar-icon">
+            <input id="date-start" type="date" bind:value={dateStart} />
+          </span>
+        </div>
+      {/if}
+
+      {#if tab === 'period'}
+        <div class="calendar-container">
+          <label class="label" for="date-end">To Date</label>
+          <span class="calendar-icon">
+            <input id="date-end" type="date" bind:value={dateEnd} />
+          </span>
+        </div>
+      {/if}
+
+      <div>
+        <label for="market" class="label">Select Group Name</label>
+        <select id="market" class="select" bind:value={selectedMarket}>
+          <option value="">All Markets</option>
+          {#each markets as market}
+            <option value={market.id}>{market.name}</option>
+          {/each}
+        </select>
+      </div>
+
+      <button class="emp-btn" on:click={() => downloadFile('XML')}>XML</button>
+      <button class="emp-btn" on:click={() => downloadFile('JSON')}>JSON</button
+      >
+      <button class="emp-btn excel" on:click={() => downloadFile('EXCEL')}
+        >EXCEL</button
+      >
+    </section>
   </div>
 </main>
-
-<style>
-</style>
