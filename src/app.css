@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+nav {
+  height: 84px;
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #bec4cc;
+}
+
+.nav-wrapper {
+  width: 80%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+}
+
+.log-out-icon {
+  margin: 0 10px 0 30px;
+}
+
+.log-out-link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.user-name-field {
+  color: #818890;
+}
+
+main {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f8f8f8;
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.main-wrapper {
+  width: 80%;
+  max-width: 1200px;
+}
+
+.title {
+  margin: 80px 0 30px 40px;
+  color: #24292c;
+  font-size: 22px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  width: 200px;
+  border: 1px solid #dae1e7;
+  display: grid;
+  place-items: center;
+  position: relative;
+  top: 1px;
+}
+
+li button {
+  padding: 15px;
+  cursor: pointer;
+  color: #818890;
+  font-size: 15px;
+  font-weight: 700;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+li:first-of-type {
+  border-radius: 6px 0 0 0;
+}
+
+li:last-of-type {
+  border-radius: 0 6px 0 0;
+}
+
+.active button {
+  background-color: white;
+  border-bottom: none;
+  color: #0083bb;
+}
+
+section {
+  width: 100%;
+  background-color: white;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 80px;
+  align-items: flex-start;
+  gap: 40px;
+  border: 1px solid #dae1e7;
+  border-radius: 0 6px 6px 6px;
+}
+
+span {
+  color: #818890;
+  font-size: 13px;
+}
+
+.calendars-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.calendars-wrapper > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.emp-btn {
+  width: 140px;
+  height: 44px;
+  background-color: #00a1e6;
+  border: none;
+  border-radius: 22px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px 10px 0 0;
+}
+
+.emp-btn:hover {
+  cursor: pointer;
+  background-color: #00b8e0;
+}
+
+.excel {
+  background-color: #84c100;
+}
+
+.excel:hover {
+  background-color: #91d300;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  cursor: pointer;
+}
+
+input[type='date'] {
+  border: none;
+  border-bottom: 1px solid #bec4cc;
+  padding: 10px 10px 10px 0;
+  position: relative;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+}
+
+.calendar-icon {
+  position: relative;
+  padding-right: 40px;
+}
+
+.calendar-icon:after {
+  content: url(./assets/calendar.svg);
+  position: absolute;
+  top: -4px;
+  right: 42px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #818890;
+  margin: 4px 0 4px 2px;
+}
+
+.calendar-container {
+  display: inline-block;
+}
+
+.select {
+  width: 200px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid #bec4cc;
+  font-size: 15px;
+  font-weight: 500;
+  color: #24292c;
+}
+
+.select:focus {
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .nav-wrapper {
+    flex-direction: column;
+  }
+  .logo {
+    width: 280px;
+    margin: 20px;
+  }
+
+  nav {
+    height: 100px;
+    padding-bottom: 10px;
+  }
+
+  .main-wrapper {
+    width: 95%;
+  }
+}
